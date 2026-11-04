@@ -11,61 +11,155 @@
   <style>
     :root {
       --bg: #232427;
+      --card: rgba(255, 255, 255, 0.045);
+      --card-hover: rgba(255, 255, 255, 0.08);
       --text: #f2f2f0;
       --muted: #a3a39f;
       --line: #3b3c40;
-      --hover: #fff;
+      --c1: #ff8a65;
+      --c2: #ff4d8d;
+      --c3: #9b7bff;
+      --c4: #4dd0e1;
+      --grad: linear-gradient(100deg, var(--c1), var(--c2) 35%, var(--c3) 70%, var(--c4));
       color-scheme: dark;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
       margin: 0;
+      overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
       font-family: "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
       line-height: 1.85;
       -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--text); text-decoration-color: var(--muted); text-underline-offset: 4px; }
-    a:hover { color: var(--hover); text-decoration-color: var(--hover); }
-    a:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--c4); outline-offset: 4px; border-radius: 6px; }
     .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
 
-    /* ヘッダー：名前を大きく見せる */
-    header { padding: clamp(72px, 16vh, 160px) 0 56px; }
+    /* ヘッダー：グラデーションの光とグラデーション文字 */
+    header { position: relative; padding: clamp(80px, 16vh, 160px) 0 64px; }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -30% -20% auto -20%;
+      height: 120%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(40% 50% at 20% 35%, rgba(255, 77, 141, 0.30), transparent 70%),
+        radial-gradient(38% 48% at 52% 25%, rgba(155, 123, 255, 0.30), transparent 70%),
+        radial-gradient(35% 45% at 82% 40%, rgba(77, 208, 225, 0.24), transparent 70%);
+      filter: blur(30px);
+    }
     header h1 {
       margin: 0;
+      padding-bottom: 0.06em;
       font-size: clamp(2.8rem, 11vw, 6.5rem);
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.02;
       letter-spacing: -0.035em;
+      color: var(--c2);
+      background-image: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .ja { margin: 20px 0 0; font-size: 1.15rem; letter-spacing: 0.12em; }
+    .ja { margin: 22px 0 0; font-size: 1.2rem; letter-spacing: 0.14em; }
     .affil { margin: 4px 0 0; color: var(--muted); }
+    .bar { width: 72px; height: 4px; margin-top: 32px; border-radius: 4px; background: var(--grad); }
 
-    /* 各セクション：左に見出し、右に内容 */
-    section {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 12px 32px;
-      padding: 40px 0;
-      border-top: 1px solid var(--line);
+    /* セクション */
+    section { padding: 44px 0 8px; }
+    section h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 22px;
+      font-size: 1.35rem;
+      font-weight: 700;
     }
-    section h2 { margin: 0; font-size: 0.95rem; font-weight: 500; color: var(--muted); }
-    section p { margin: 0 0 12px; }
-    section p:last-child { margin-bottom: 0; }
+    section h2::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--grad);
+    }
 
-    .works { list-style: none; padding: 0; margin: 0; }
-    .works li + li { margin-top: 28px; }
-    .works h3 { margin: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
-    .works p { margin: 4px 0 0; color: var(--muted); }
+    /* カード共通 */
+    .card {
+      display: block;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      color: inherit;
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    a.card:hover, .card.hoverable:hover {
+      transform: translateY(-3px);
+      border-color: rgba(155, 123, 255, 0.7);
+      background: var(--card-hover);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(155, 123, 255, 0.25);
+    }
 
-    footer { padding: 32px 0 72px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+    /* 制作物 */
+    .work h3 { margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.5; }
+    .work p { margin: 4px 0 14px; color: var(--muted); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 2px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background:
+        linear-gradient(var(--bg), var(--bg)) padding-box,
+        var(--grad) border-box;
+      font-size: 0.85rem;
+    }
 
-    @media (max-width: 640px) {
-      section { grid-template-columns: 1fr; padding: 32px 0; }
+    /* スキル（アイコン） */
+    .skills {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+      gap: 14px;
+    }
+    .skills li { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 8px 14px; text-align: center; }
+    .skills .icon {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: #f1f1ee;
+    }
+    .skills img { width: 38px; height: 38px; }
+    .skills span { font-size: 0.9rem; line-height: 1.3; }
+
+    /* リンク */
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .links .label { display: block; margin-bottom: 2px; color: var(--muted); font-size: 0.85rem; }
+    .links .value { display: block; font-size: 1.02rem; overflow-wrap: anywhere; }
+
+    footer { margin-top: 48px; padding: 28px 0 72px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+    /* ふわっと表示 */
+    @media (prefers-reduced-motion: no-preference) {
+      header .wrap > * { animation: rise .7s ease both; }
+      header .wrap > :nth-child(2) { animation-delay: .08s; }
+      header .wrap > :nth-child(3) { animation-delay: .16s; }
+      header .wrap > :nth-child(4) { animation-delay: .24s; }
+      @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .card { transition: none; }
+      a.card:hover, .card.hoverable:hover { transform: none; }
     }
   </style>
 </head>
@@ -75,30 +169,52 @@
       <h1>Koshimizu<br>Haruto</h1>
       <p class="ja">輿水遥人</p>
       <p class="affil">愛知工業大学 情報科学部 情報科学科 コンピュータシステム専攻</p>
+      <div class="bar"></div>
     </div>
   </header>
 
   <main class="wrap">
     <section id="works">
       <h2>制作物</h2>
-      <ul class="works">
-        <li>
-          <h3><!-- 公開リポジトリができたら下の行に差し替え：<a href="https://github.com/Haruto-Koshimizu/リポジトリ名">うどん作り体験ゲーム「踏みすぎて麺！」</a> -->うどん作り体験ゲーム「踏みすぎて麺！」</h3>
-          <p>TGS2026プロジェクト</p>
-        </li>
-      </ul>
+      <!-- 公開リポジトリができたら、下の <div class="card work hoverable"> を
+           <a class="card work" href="https://github.com/Haruto-Koshimizu/リポジトリ名"> に、
+           閉じタグ </div> を </a> に差し替えるとカード全体がリンクになります -->
+      <div class="card work hoverable">
+        <h3>うどん作り体験ゲーム「踏みすぎて麺！」</h3>
+        <p>TGS2026プロジェクト</p>
+        <div class="chips"><span class="chip">Unity</span></div>
+      </div>
     </section>
 
     <section id="skills">
       <h2>スキル</h2>
-      <p>Unity / Git / GitHub / Javascript / HTML / CSS / Java</p>
+      <ul class="skills">
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/unity/unity-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>Unity</span></li>
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>Git</span></li>
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/github/github-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>GitHub</span></li>
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>JavaScript</span></li>
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>HTML</span></li>
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>CSS</span></li>
+        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/java/java-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>Java</span></li>
+      </ul>
     </section>
 
     <section id="contact">
       <h2>リンク</h2>
-      <p><a href="https://github.com/Haruto-Koshimizu">GitHub</a></p>
-      <p><a href="ko.haru414@icloud.com">メール</a></p>
-      <p><a href="k24062kk@aitech.ac.jp">大学メール</a></p>
+      <div class="links">
+        <a class="card" href="https://github.com/Haruto-Koshimizu">
+          <span class="label">GitHub</span>
+          <span class="value">github.com/Haruto-Koshimizu</span>
+        </a>
+        <a class="card" href="mailto:ko.haru414@icloud.com">
+          <span class="label">メール</span>
+          <span class="value">ko.haru414@icloud.com</span>
+        </a>
+        <a class="card" href="mailto:k24062kk@aitech.ac.jp">
+          <span class="label">大学メール</span>
+          <span class="value">k24062kk@aitech.ac.jp</span>
+        </a>
+      </div>
     </section>
   </main>
 
