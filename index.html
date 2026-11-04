@@ -16,11 +16,12 @@
       --text: #f2f2f0;
       --muted: #a3a39f;
       --line: #3b3c40;
-      --c1: #ff8a65;
-      --c2: #ff4d8d;
-      --c3: #9b7bff;
-      --c4: #4dd0e1;
-      --grad: linear-gradient(100deg, var(--c1), var(--c2) 35%, var(--c3) 70%, var(--c4));
+      /* 青・水色のアクセントカラー（ここを変えると全体の色が変わります） */
+      --c1: #5b8def;
+      --c2: #3b9cff;
+      --c3: #38bdf8;
+      --c4: #7ee7f5;
+      --grad: linear-gradient(100deg, var(--c1), var(--c2) 40%, var(--c3) 75%, var(--c4));
       color-scheme: dark;
     }
     * { box-sizing: border-box; }
@@ -38,7 +39,7 @@
     a:focus-visible { outline: 2px solid var(--c4); outline-offset: 4px; border-radius: 6px; }
     .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
 
-    /* ヘッダー：グラデーションの光とグラデーション文字 */
+    /* ヘッダー */
     header { position: relative; padding: clamp(80px, 16vh, 160px) 0 64px; }
     header::before {
       content: "";
@@ -48,9 +49,9 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(40% 50% at 20% 35%, rgba(255, 77, 141, 0.30), transparent 70%),
-        radial-gradient(38% 48% at 52% 25%, rgba(155, 123, 255, 0.30), transparent 70%),
-        radial-gradient(35% 45% at 82% 40%, rgba(77, 208, 225, 0.24), transparent 70%);
+        radial-gradient(40% 50% at 20% 35%, rgba(59, 130, 246, 0.32), transparent 70%),
+        radial-gradient(38% 48% at 52% 25%, rgba(91, 141, 239, 0.28), transparent 70%),
+        radial-gradient(35% 45% at 82% 40%, rgba(56, 189, 248, 0.26), transparent 70%);
       filter: blur(30px);
     }
     header h1 {
@@ -67,8 +68,7 @@
       -webkit-text-fill-color: transparent;
     }
     .ja { margin: 22px 0 0; font-size: 1.2rem; letter-spacing: 0.14em; }
-    .affil { margin: 4px 0 0; color: var(--muted); }
-    .bar { width: 72px; height: 4px; margin-top: 32px; border-radius: 4px; background: var(--grad); }
+    .bar { width: 72px; height: 4px; margin-top: 28px; border-radius: 4px; background: var(--grad); }
 
     /* セクション */
     section { padding: 44px 0 8px; }
@@ -101,10 +101,25 @@
     }
     a.card:hover, .card.hoverable:hover {
       transform: translateY(-3px);
-      border-color: rgba(155, 123, 255, 0.7);
+      border-color: rgba(56, 189, 248, 0.75);
       background: var(--card-hover);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(155, 123, 255, 0.25);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(56, 189, 248, 0.25);
     }
+
+    /* 自己紹介 */
+    .lead { margin: 0 0 20px; }
+    .profile { margin: 0; }
+    .profile .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 4px 24px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+    }
+    .profile .row:first-child { border-top: 0; padding-top: 0; }
+    .profile .row:last-child { padding-bottom: 0; }
+    .profile dt { color: var(--muted); font-size: 0.95rem; }
+    .profile dd { margin: 0; }
 
     /* 制作物 */
     .work h3 { margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.5; }
@@ -120,7 +135,7 @@
       font-size: 0.85rem;
     }
 
-    /* スキル（アイコン） */
+    /* スキル（文字のアイコン） */
     .skills {
       list-style: none;
       margin: 0;
@@ -136,10 +151,14 @@
       width: 64px;
       height: 64px;
       border-radius: 16px;
-      background: #f1f1ee;
+      background: linear-gradient(135deg, var(--c2), var(--c3));
+      color: #08121f;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
     }
-    .skills img { width: 38px; height: 38px; }
-    .skills span { font-size: 0.9rem; line-height: 1.3; }
+    .skills span.name { font-size: 0.9rem; line-height: 1.3; }
 
     /* リンク */
     .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
@@ -148,12 +167,15 @@
 
     footer { margin-top: 48px; padding: 28px 0 72px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
 
+    @media (max-width: 560px) {
+      .profile .row { grid-template-columns: 1fr; }
+    }
+
     /* ふわっと表示 */
     @media (prefers-reduced-motion: no-preference) {
       header .wrap > * { animation: rise .7s ease both; }
       header .wrap > :nth-child(2) { animation-delay: .08s; }
       header .wrap > :nth-child(3) { animation-delay: .16s; }
-      header .wrap > :nth-child(4) { animation-delay: .24s; }
       @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -168,12 +190,29 @@
     <div class="wrap">
       <h1>Koshimizu<br>Haruto</h1>
       <p class="ja">輿水遥人</p>
-      <p class="affil">愛知工業大学 情報科学部 情報科学科 コンピュータシステム専攻</p>
       <div class="bar"></div>
     </div>
   </header>
 
   <main class="wrap">
+    <section id="about">
+      <h2>自己紹介</h2>
+      <div class="card">
+        <!-- 文章で自己紹介を書く場合は、下の行のコメントを外してください
+        <p class="lead">ここに自己紹介の文章を書きます。</p>
+        -->
+        <dl class="profile">
+          <div class="row"><dt>大学</dt><dd>愛知工業大学</dd></div>
+          <div class="row"><dt>学部・学科</dt><dd>情報科学部 情報科学科</dd></div>
+          <div class="row"><dt>専攻</dt><dd>コンピュータシステム専攻</dd></div>
+
+          <!-- 項目を増やすには、下の1行をコピーして上に貼り付け、書き換えてください
+          <div class="row"><dt>項目名</dt><dd>内容</dd></div>
+          -->
+        </dl>
+      </div>
+    </section>
+
     <section id="works">
       <h2>制作物</h2>
       <!-- 公開リポジトリができたら、下の <div class="card work hoverable"> を
@@ -188,14 +227,15 @@
 
     <section id="skills">
       <h2>スキル</h2>
+      <!-- スキルを増やすには、<li>の1行をコピーして、文字（1〜2文字）と名前を書き換えてください -->
       <ul class="skills">
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/unity/unity-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>Unity</span></li>
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>Git</span></li>
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/github/github-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>GitHub</span></li>
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>JavaScript</span></li>
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>HTML</span></li>
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>CSS</span></li>
-        <li class="card hoverable"><span class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/java/java-original.svg" alt="" width="38" height="38" loading="lazy"></span><span>Java</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">U</span><span class="name">Unity</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">G</span><span class="name">Git</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">GH</span><span class="name">GitHub</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">JS</span><span class="name">JavaScript</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">H</span><span class="name">HTML</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">C</span><span class="name">CSS</span></li>
+        <li class="card hoverable"><span class="icon" aria-hidden="true">J</span><span class="name">Java</span></li>
       </ul>
     </section>
 
