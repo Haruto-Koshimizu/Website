@@ -135,30 +135,20 @@
       font-size: 0.85rem;
     }
 
-    /* スキル（文字のアイコン） */
-    .skills {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
-      gap: 14px;
+    /* スキル（制作物のタグと同じピル型） */
+    .skills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+    .skills li {
+      padding: 6px 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background:
+        linear-gradient(var(--bg), var(--bg)) padding-box,
+        var(--grad) border-box;
+      font-size: 1rem;
+      line-height: 1.6;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    .skills li { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 8px 14px; text-align: center; }
-    .skills .icon {
-      display: grid;
-      place-items: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--c2), var(--c3));
-      color: #08121f;
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-    .skills span.name { font-size: 0.9rem; line-height: 1.3; }
+    .skills li:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25); }
 
     /* リンク */
     .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
@@ -181,7 +171,8 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .card { transition: none; }
-      a.card:hover, .card.hoverable:hover { transform: none; }
+      a.card:hover, .card.hoverable:hover, .skills li:hover { transform: none; }
+      .skills li { transition: none; }
     }
   </style>
 </head>
@@ -206,6 +197,7 @@
           <div class="row"><dt>学部・学科</dt><dd>情報科学部 情報科学科</dd></div>
           <div class="row"><dt>専攻</dt><dd>コンピュータシステム専攻</dd></div>
           <div class="row"><dt>出身</dt><dd>長野県南佐久郡</dd></div>
+
           <!-- 項目を増やすには、下の1行をコピーして上に貼り付け、書き換えてください
           <div class="row"><dt>項目名</dt><dd>内容</dd></div>
           -->
@@ -227,15 +219,15 @@
 
     <section id="skills">
       <h2>スキル</h2>
-      <!-- スキルを増やすには、<li>の1行をコピーして、文字（1〜2文字）と名前を書き換えてください -->
+      <!-- スキルを増やすには、<li>の1行をコピーして、名前を書き換えてください -->
       <ul class="skills">
-        <li class="card hoverable"><span class="name">Unity</span></li>
-        <li class="card hoverable"><span class="name">Git</span></li>
-        <li class="card hoverable"><span class="name">GitHub</span></li>
-        <li class="card hoverable"><span class="name">JavaScript</span></li>
-        <li class="card hoverable"><span class="name">HTML</span></li>
-        <li class="card hoverable"><span class="name">CSS</span></li>
-        <li class="card hoverable"><span class="name">Java</span></li>
+        <li>Unity</li>
+        <li>Git</li>
+        <li>GitHub</li>
+        <li>JavaScript</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Java</li>
       </ul>
     </section>
 
