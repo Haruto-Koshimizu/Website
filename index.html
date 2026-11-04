@@ -2,9 +2,115 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>My Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Koshimizu Haruto</title>
+  <meta name="description" content="Koshimizu Haruto のポートフォリオサイト">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --text: #1f2933;
+      --muted: #5f6b76;
+      --line: #d9d6cf;
+      --accent: #1d5fd1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #14171c;
+        --text: #e8e6e1;
+        --muted: #9aa3ad;
+        --line: #2c323a;
+        --accent: #7fa8ff;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.8;
+    }
+    a { color: var(--accent); }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    header { padding: 72px 0 40px; border-bottom: 1px solid var(--line); }
+    header h1 { margin: 0; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.2; letter-spacing: 0.01em; }
+    header p { margin: 12px 0 0; color: var(--muted); font-size: 1.05rem; }
+    nav { margin-top: 28px; display: flex; gap: 20px; flex-wrap: wrap; }
+
+    section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+    section h2 { margin: 0 0 20px; font-size: 1.4rem; }
+    section p { margin: 0 0 12px; }
+
+    .skills { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .skills li { border: 1px solid var(--line); border-radius: 999px; padding: 2px 14px; font-size: 0.95rem; }
+
+    .works { list-style: none; padding: 0; margin: 0; }
+    .works li { padding: 16px 0; border-top: 1px solid var(--line); }
+    .works li:first-child { border-top: 0; padding-top: 0; }
+    .works h3 { margin: 0; font-size: 1.1rem; }
+    .works p { margin: 4px 0 0; color: var(--muted); }
+
+    footer { padding: 32px 0 64px; color: var(--muted); font-size: 0.9rem; }
+  </style>
 </head>
 <body>
-  <h1>Koshimizu Pages!</h1>
+  <header>
+    <div class="wrap">
+      <h1>Koshimizu Haruto</h1>
+      <p><!-- ひとこと紹介 -->大学生 / ここに肩書きや一言を書く</p>
+      <nav>
+        <a href="#about">自己紹介</a>
+        <a href="#skills">スキル</a>
+        <a href="#works">制作物</a>
+        <a href="#contact">リンク</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="about">
+      <h2>自己紹介</h2>
+      <p>ここに自己紹介を書きます。所属、学んでいること、興味のある分野などを2〜3文でまとめましょう。</p>
+      <p>例：〇〇大学 △△学部に在籍しています。□□の開発に興味があります。</p>
+    </section>
+
+    <section id="skills">
+      <h2>スキル</h2>
+      <ul class="skills">
+        <li>HTML / CSS</li>
+        <li>JavaScript</li>
+        <li>Git / GitHub</li>
+        <li>（ここに追加）</li>
+      </ul>
+    </section>
+
+    <section id="works">
+      <h2>制作物</h2>
+      <ul class="works">
+        <li>
+          <h3><a href="https://github.com/ユーザー名/リポジトリ名">作品1のタイトル</a></h3>
+          <p>作品の説明を1〜2行で。使った技術や工夫した点など。</p>
+        </li>
+        <li>
+          <h3><a href="https://github.com/ユーザー名/リポジトリ名">作品2のタイトル</a></h3>
+          <p>作品の説明を1〜2行で。</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>リンク</h2>
+      <p><a href="https://github.com/ユーザー名">GitHub</a></p>
+      <p><a href="mailto:your-address@example.com">メール</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">&copy; 2026 Koshimizu Haruto</div>
+  </footer>
 </body>
 </html>
