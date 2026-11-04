@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
   <title>Koshimizu Haruto</title>
-  <meta name="description" content="Koshimizu Haruto のポートフォリオサイト">
+  <meta name="description" content="輿水遥人（Koshimizu Haruto）のポートフォリオ。愛知工業大学 情報科学部 情報科学科 コンピュータシステム専攻。">
+  <meta property="og:title" content="Koshimizu Haruto">
+  <meta property="og:description" content="輿水遥人のポートフォリオ">
   <style>
     :root {
-      --bg: #fbfaf7;
-      --text: #1f2933;
-      --muted: #5f6b76;
-      --line: #d9d6cf;
-      --accent: #1d5fd1;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #14171c;
-        --text: #e8e6e1;
-        --muted: #9aa3ad;
-        --line: #2c323a;
-        --accent: #7fa8ff;
-      }
+      --bg: #000;
+      --text: #f2f2f0;
+      --muted: #8d8d8a;
+      --line: #262626;
+      --hover: #fff;
+      color-scheme: dark;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -29,76 +24,84 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
-      line-height: 1.8;
+      font-family: "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--accent); }
-    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    a { color: var(--text); text-decoration-color: var(--muted); text-underline-offset: 4px; }
+    a:hover { color: var(--hover); text-decoration-color: var(--hover); }
+    a:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
 
-    header { padding: 72px 0 40px; border-bottom: 1px solid var(--line); }
-    header h1 { margin: 0; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.2; letter-spacing: 0.01em; }
-    header p { margin: 12px 0 0; color: var(--muted); font-size: 1.05rem; }
-    nav { margin-top: 28px; display: flex; gap: 20px; flex-wrap: wrap; }
+    /* ヘッダー：名前を大きく見せる */
+    header { padding: clamp(72px, 16vh, 160px) 0 56px; }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 11vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+    .ja { margin: 20px 0 0; font-size: 1.15rem; letter-spacing: 0.12em; }
+    .affil { margin: 4px 0 0; color: var(--muted); }
 
-    section { padding: 48px 0; border-bottom: 1px solid var(--line); }
-    section h2 { margin: 0 0 20px; font-size: 1.4rem; }
+    /* 各セクション：左に見出し、右に内容 */
+    section {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px 32px;
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+    }
+    section h2 { margin: 0; font-size: 0.95rem; font-weight: 500; color: var(--muted); }
     section p { margin: 0 0 12px; }
-
-    .skills { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-    .skills li { border: 1px solid var(--line); border-radius: 999px; padding: 2px 14px; font-size: 0.95rem; }
+    section p:last-child { margin-bottom: 0; }
 
     .works { list-style: none; padding: 0; margin: 0; }
-    .works li { padding: 16px 0; border-top: 1px solid var(--line); }
-    .works li:first-child { border-top: 0; padding-top: 0; }
-    .works h3 { margin: 0; font-size: 1.1rem; }
+    .works li + li { margin-top: 28px; }
+    .works h3 { margin: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
     .works p { margin: 4px 0 0; color: var(--muted); }
 
-    footer { padding: 32px 0 64px; color: var(--muted); font-size: 0.9rem; }
+    footer { padding: 32px 0 72px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+    @media (max-width: 640px) {
+      section { grid-template-columns: 1fr; padding: 32px 0; }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap">
-      <h1>Koshimizu Haruto</h1>
-      <p><!-- ひとこと紹介 -->輿水遥人</p>
-      <nav>
-        <a href="#about">自己紹介</a>
-        <a href="#skills">スキル</a>
-        <a href="#works">制作物</a>
-        <a href="#contact">リンク</a>
-      </nav>
+      <h1>Koshimizu<br>Haruto</h1>
+      <p class="ja">輿水遥人</p>
+      <p class="affil">愛知工業大学 情報科学部 情報科学科 コンピュータシステム専攻</p>
     </div>
   </header>
 
   <main class="wrap">
-    <section id="about">
-      <h2>自己紹介</h2>
-      <p>愛知工業大学情報科学部情報科学科コンピュータシステム専攻</p>
-      <p></p>
-    </section>
-
-    <section id="skills">
-      <h2>スキル</h2>
-      <ul class="skills">
-        <li></li>
-      </ul>
-    </section>
-
     <section id="works">
       <h2>制作物</h2>
       <ul class="works">
         <li>
-          <h3><a href="https://github.com/ユーザー名/リポジトリ名">うどん作り体験ゲーム「踏みすぎて麺！」</a></h3>
+          <h3><!-- 公開リポジトリができたら下の行に差し替え：<a href="https://github.com/Haruto-Koshimizu/リポジトリ名">うどん作り体験ゲーム「踏みすぎて麺！」</a> -->うどん作り体験ゲーム「踏みすぎて麺！」</h3>
           <p>TGS2026プロジェクト</p>
         </li>
       </ul>
     </section>
 
+    <!-- スキルを載せる場合は、下のコメントを外して中身を書き換えてください
+    <section id="skills">
+      <h2>スキル</h2>
+      <p>Unity / Git / GitHub</p>
+    </section>
+    -->
+
     <section id="contact">
       <h2>リンク</h2>
       <p><a href="https://github.com/Haruto-Koshimizu">GitHub</a></p>
+      <!-- メールを載せる場合は、下のコメントを外してアドレスを書き換えてください
       <p><a href="mailto:your-address@example.com">メール</a></p>
+      -->
     </section>
   </main>
 
